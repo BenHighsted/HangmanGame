@@ -4,7 +4,7 @@ namespace HangmanLibrary
 {
     public class Hangman
     {
-        private readonly String[] words = { "Hello World", "Developer", "C Sharp", "Coder" };
+        public readonly String[] words = { "Hello World", "Developer", "C Sharp", "Coder" };
 
         /// <summary>
         /// Generates a random word that the user will have to try and guess.
@@ -23,13 +23,23 @@ namespace HangmanLibrary
         /// <param name="word">The word the user is trying to guess</param>
         /// <param name="letter">The letter the user has guessed</param>
         /// <returns>If the letter is contained, the index of the letter is returned</returns>
-        public int CheckLetter(String word, String letter)
+        public int CheckLetter(String word, char letter)
         {
-            String[] letters = word.Split("");
-            for (int i = 0; i < letters.Length; i++)
+            //String[] letters = word.Split("");
+            //Console.WriteLine(letters[0]);
+            //for (int i = 0; i < letters.Length; i++)
+            //{
+            //  if (letters[i].Equals(letter))
+            //    return i;
+            //}
+            int i = 0;
+
+            foreach (char c in word)
             {
-                if (letters[i].Equals(letter))
+                if (c.CompareTo(letter) == 0)
                     return i;
+                else
+                    i++;
             }
             return -1; //if not contained in word, return -1 to indicate it wasnt found
         }

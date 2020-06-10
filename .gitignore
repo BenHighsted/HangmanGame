@@ -1,0 +1,8 @@
+# MacOS #
+.DS_Store
+._*
+
+# Visual Studio #
+.vs
+bin
+obj

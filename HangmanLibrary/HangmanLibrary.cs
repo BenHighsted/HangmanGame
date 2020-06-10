@@ -23,13 +23,13 @@ namespace HangmanLibrary
         /// <param name="word">The word the user is trying to guess</param>
         /// <param name="letter">The letter the user has guessed</param>
         /// <returns>If the letter is contained, the index of the letter is returned</returns>
-        public int CheckLetter(String word, char letter)
+        public int CheckLetter(String word, string letter)
         {
             int i = 0;
 
-            foreach (char c in word)
+            foreach (char c in word.ToUpper())
             {
-                if (c.CompareTo(letter) == 0)
+                if (c.CompareTo(char.Parse(letter.ToUpper())) == 0)
                     return i;
                 else
                     i++;

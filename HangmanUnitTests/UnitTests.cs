@@ -25,7 +25,7 @@ namespace HangmanUnitTests
         public void CheckLetter()
         {
             Hangman game = new Hangman();
-            Assert.AreEqual(1, game.CheckLetter("test", 'e'));
+            Assert.AreEqual(1, game.CheckLetter("test", "e"));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace HangmanUnitTests
         public void InvalidCheckLetter()
         {
             Hangman game = new Hangman();
-            Assert.AreEqual(-1, game.CheckLetter("test", '-'));
+            Assert.AreEqual(-1, game.CheckLetter("test", "-"));
         }
 
         [TestMethod]

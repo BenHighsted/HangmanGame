@@ -25,13 +25,6 @@ namespace HangmanLibrary
         /// <returns>If the letter is contained, the index of the letter is returned</returns>
         public int CheckLetter(String word, char letter)
         {
-            //String[] letters = word.Split("");
-            //Console.WriteLine(letters[0]);
-            //for (int i = 0; i < letters.Length; i++)
-            //{
-            //  if (letters[i].Equals(letter))
-            //    return i;
-            //}
             int i = 0;
 
             foreach (char c in word)

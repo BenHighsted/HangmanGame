@@ -45,7 +45,7 @@ namespace HangmanLibrary
         /// <returns>Returns true if the guess was correct, otherwise it returns else</returns>
         public bool GuessWord(String word, String guess)
         {
-            if (word.Equals(guess))
+            if (word.ToUpper().Equals(guess.ToUpper()))
                 return true;
             else
                 return false;

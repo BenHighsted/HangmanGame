@@ -7,7 +7,7 @@ namespace HangmanConsole
     class HangmanConsole
     {
         //according to the internet, 6 is the number of guesses for a standard game
-        private readonly int totalGuesses = 6; 
+        private readonly int totalGuesses = 6;
 
         static void Main(string[] args)
         {
@@ -38,6 +38,8 @@ namespace HangmanConsole
             {
                 string input = Console.ReadLine();
 
+                // Console.Clear(); (Clears the contents on the screen, might be useful later)
+
                 if (input.Length == 1)
                 {
                     Console.WriteLine("You entered the letter: " + input);
@@ -54,8 +56,11 @@ namespace HangmanConsole
                 {
                     Console.WriteLine("You guessed the word: " + input);
 
-                    if (game.GuessWord(word, input)) //if the word was the correct guess
+                    if (game.GuessWord(word, input))
+                    { //if the word was the correct guess
                         word_not_guessed = true;
+                        Console.WriteLine("You win!");
+                    }
                     else
                         guesses++;
                 }
@@ -63,8 +68,11 @@ namespace HangmanConsole
                     Console.WriteLine("Invalid Input.");
                 }
 
-                Console.WriteLine(puzzle);
-                Console.WriteLine("Guesses so far: " + guesses + "\n");
+                if (!word_not_guessed)
+                {
+                    Console.WriteLine(puzzle);
+                    Console.WriteLine("Guesses so far: " + guesses + "\n");
+                }
             }
         }
 
@@ -74,7 +82,7 @@ namespace HangmanConsole
 
             foreach (char letter in word)
             {
-                if (letter.Equals(" "))
+                if (letter.Equals(char.Parse(" ")))
                     puzzle += " ";
                 else
                     puzzle += "_";
@@ -88,10 +96,13 @@ namespace HangmanConsole
             List<int> indexes = new List<int>();
             int count = 0;
 
-            foreach (char character in word) {
+            foreach (char character in word)
+            {
 
-                if (character.Equals(letter))
+                if (Char.ToUpper(character).Equals(char.Parse(letter.ToUpper())))
+                {
                     indexes.Add(count);
+                }
 
                 count++;
             }
@@ -100,8 +111,7 @@ namespace HangmanConsole
 
             foreach (int index in indexes)
             {
-                charsPuzzle[index] = char.Parse(letter);
-                Console.WriteLine("We in here boi");
+                charsPuzzle[index] = char.Parse(letter.ToUpper());
             }
 
             return new string(charsPuzzle);

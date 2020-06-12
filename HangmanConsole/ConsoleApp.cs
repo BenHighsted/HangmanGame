@@ -7,7 +7,6 @@ namespace HangmanConsole
     class HangmanConsole
     {
         //according to the internet, 6 is the number of guesses for a standard game
-        private readonly int totalGuesses = 6;
 
         static void Main(string[] args)
         {
@@ -27,12 +26,18 @@ namespace HangmanConsole
 
         private static void RunGame(Hangman game, string word, string puzzle)
         {
+            int totalGuesses = 6;
+
             Console.WriteLine("The generated puzzle: " + puzzle);
 
             Console.WriteLine("Enter a single letter, or try guess the word.");
 
             bool word_not_guessed = false;
+            bool invalid = false;
+
             int guesses = 0;
+
+            List<String> guessedLetters = new List<String>();
 
             while (!word_not_guessed)
             {
@@ -43,18 +48,29 @@ namespace HangmanConsole
                 if (input.Length == 1)
                 {
                     Console.WriteLine("You entered the letter: " + input);
-                    if (game.CheckLetter(word, input) != -1)
+                    if (!guessedLetters.Contains(input.ToUpper()))
                     {
-                        puzzle = UpdatePuzzle(word, puzzle, input);
+                        if (game.CheckLetter(word, input) != -1)
+                        {
+                            puzzle = UpdatePuzzle(word, puzzle, input);
+                            guessedLetters.Add(input.ToUpper());
+
+                        }
+                        else
+                        {
+                            guessedLetters.Add(input.ToUpper());
+                            guesses++;
+                        }
                     }
                     else {
-                        guesses++;
+                        Console.WriteLine("You already guessed that letter. Try again.");
+                        invalid = true;
                     }
 
                 }
                 else if (input.Length > 1)
                 {
-                    Console.WriteLine("You guessed the word: " + input);
+                    Console.WriteLine("You guessed the word: " + input.ToUpper());
 
                     if (game.GuessWord(word, input))
                     { //if the word was the correct guess
@@ -66,13 +82,29 @@ namespace HangmanConsole
                 }
                 else {
                     Console.WriteLine("Invalid Input.");
+                    invalid = true;
                 }
 
-                if (!word_not_guessed)
+                if (!word_not_guessed && !invalid)
                 {
-                    Console.WriteLine(puzzle);
-                    Console.WriteLine("Guesses so far: " + guesses + "\n");
+                    Console.WriteLine(puzzle.ToUpper());
+
+                    Console.WriteLine("Incorrect guesses so far: " + guesses + "\n");
+
+                    Console.Write("Guessed letters: ");
+                    foreach (String letter in guessedLetters) {
+                        Console.Write(letter + ", ");
+                    }
+                    Console.WriteLine();
                 }
+
+                invalid = false;
+
+                if (guesses == totalGuesses) {
+                    Console.WriteLine("You Lose!");
+                    break;
+                }
+
             }
         }
 

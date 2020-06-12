@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 
 namespace HangmanLibrary
 {
     public class Hangman
     {
-        public readonly String[] words = { "Hello World", "Developer", "C Sharp", "Coder" };
+        public String[] words = { "Hello World", "Developer", "C Sharp", "Coder" };
 
         /// <summary>
         /// Generates a random word that the user will have to try and guess.
@@ -14,6 +15,10 @@ namespace HangmanLibrary
         public String GenerateWord()
         {
             Random rand = new Random();
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "\\DefaultWords.txt");
+            string[] words = File.ReadAllLines(path);
+
             return words[rand.Next(words.Length)];
         }
 

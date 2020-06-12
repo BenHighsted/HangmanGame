@@ -1,2 +1,5 @@
 # HangmanGame
-Hangman game created in C# with a GUI
+Hangman game created in C#
+
+## Usage
+To be added.
